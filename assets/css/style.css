@@ -1,0 +1,58 @@
+body {
+  font-family: 'Ubuntu', sans-serif;
+  background-image: url('../pictures/sky-photo.png');
+  background-size: cover;
+}
+
+main {
+  display: flex;
+  align-items: center;
+  gap: 3vw;
+}
+
+sidebar {
+  height: 90vh;
+  width: 20vw;
+  background-color: dodgerblue;
+  float: left;
+}
+
+weather {
+  height: 85vh;
+  width: 75vw;
+  background-color: white;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+}
+
+.weather-forecast {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+
+  margin-top: 5%;
+}
+
+.weather-forecast > div {
+  height: 25vh;
+}
+
+#city-name {
+  font-size: 8vh;
+  text-align: center;
+  margin: 2% 2% 0 2%;
+  padding: 1%;
+  background-color: dodgerblue;
+  color: white;
+}
+
+#five-day-forecast {
+  text-align: center;
+  background-color: #1977d4;
+  margin: 0 10% 0 10%;
+  padding: 1%;
+  color: white;
+}
