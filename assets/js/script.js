@@ -11,7 +11,7 @@ const sidebarListGroupEl = document.querySelector(".list-group");
 // Sets San Diego as first localStorage entry for default reload location
 localStorage.setItem(
   "San Diego",
-  JSON.stringify({ city: "San Diego", lat: "32.7174202", lon: "-117.1627728"})
+  JSON.stringify({ city: "San Diego", lat: "32.7174202", lon: "-117.1627728" })
 );
 
 // After search button has been clicked, function will get coordinates from city name.
@@ -19,7 +19,7 @@ function retrieveLocation() {
   event.preventDefault();
   let cityName = locationTextInputEl.value;
   fetch(
-    `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`
+    `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`
   )
     .then((response) => response.json())
     .then((data) => {
@@ -32,7 +32,7 @@ function retrieveLocation() {
         city: data.name,
         lat: data.lat,
         lon: data.lon,
-      }
+      };
       // Functions are called to get current weather & future 5 day weather
       currentWeather(data.lat, data.lon);
       weatherForecast(data.lat, data.lon);
@@ -109,7 +109,7 @@ function currentWeatherCard(weatherData) {
 // gets 5 day forecast
 function weatherForecast(lat, lon) {
   fetch(
-    `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
+    `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
   )
     .then((response) => response.json())
     .then((data) => {
@@ -159,7 +159,7 @@ function weatherForecast(lat, lon) {
       ];
       for (i = 0; i < fiveDayForecast.length; i++) {
         forecastWeatherCard(fiveDayForecast);
-      };
+      }
     });
 }
 
@@ -203,16 +203,16 @@ function loadLocalStorage() {
     );
     locationBtnEl.textContent = storedCity.city;
     sidebarListGroupEl.appendChild(locationBtnEl);
-    locationBtnEl.addEventListener('click', ()=> {
+    locationBtnEl.addEventListener("click", () => {
       currentWeather(storedCity.lat, storedCity.lon);
       weatherForecast(storedCity.lat, storedCity.lon);
     });
-  };
-};
+  }
+}
 
 function savedWeather() {
-  let storedCity = JSON.parse(localStorage.getItem('San Diego'));
-  console.log('Default City Location:')
+  let storedCity = JSON.parse(localStorage.getItem("San Diego"));
+  console.log("Default City Location:");
   console.log(storedCity);
   currentWeather(storedCity.lat, storedCity.lon);
   weatherForecast(storedCity.lat, storedCity.lon);
