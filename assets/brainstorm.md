@@ -26,6 +26,6 @@ let currentWeatherData = {
 
 2, 10, 18, 26, 34 array in weather -->
 
-TO-DO:
+<!-- TO-DO:
 
-Save City input in localStorage into a button for access later
+Save City input in localStorage into a button for access later -->
