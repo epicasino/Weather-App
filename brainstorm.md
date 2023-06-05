@@ -1,4 +1,4 @@
-fdd47a31742f20a780b4991da19c107b
+<!-- fdd47a31742f20a780b4991da19c107b
 
 api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
 
@@ -24,4 +24,8 @@ let currentWeatherData = {
         wind
       };
 
-2, 10, 18, 26, 34 array in weather
+2, 10, 18, 26, 34 array in weather -->
+
+TO-DO:
+
+Save City input in localStorage into a button for access later

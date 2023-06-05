@@ -2,6 +2,17 @@ const apiKey = "fdd47a31742f20a780b4991da19c107b";
 const locationTextInputEl = document.querySelector("#location-text-input");
 
 const searchBtnEl = document.querySelector("#searchBtn");
+const cityNameEl = document.querySelector("#city-name");
+const currentDayCardEl = document.querySelector("#weather-day0");
+const currentWeatherEl = currentDayCardEl.children[0];
+const weatherForecastEl = document.querySelector(".weather-forecast");
+const sidebarListGroupEl = document.querySelector(".list-group");
+
+// Sets San Diego as first localStorage entry for default reload location
+localStorage.setItem(
+  "San Diego",
+  JSON.stringify({ city: "San Diego", lat: "32.7174202", lon: "-117.1627728"})
+);
 
 // After search button has been clicked, function will get coordinates from city name.
 function retrieveLocation() {
@@ -17,9 +28,17 @@ function retrieveLocation() {
       console.log(data);
       console.log(`City Name: ${data.name}`);
       console.log(`City Coordinates: ${data.lat}, ${data.lon}`);
+      let location = {
+        city: data.name,
+        lat: data.lat,
+        lon: data.lon,
+      }
       // Functions are called to get current weather & future 5 day weather
       currentWeather(data.lat, data.lon);
       weatherForecast(data.lat, data.lon);
+
+      // Location data stored to localstorage
+      localStorage.setItem(data.name, JSON.stringify(location));
     });
 }
 
@@ -30,8 +49,6 @@ function currentWeather(lat, lon) {
   )
     .then((response) => response.json())
     .then((data) => {
-      console.log(`Current Weather:`);
-      console.log(data);
       let currentWeatherData = {
         city: data.name,
         currentTemp: data.main.temp, // in F
@@ -46,13 +63,9 @@ function currentWeather(lat, lon) {
     });
 }
 
-const cityNameEl = document.querySelector("#city-name");
-const currentDayCardEl = document.querySelector("#weather-day0");
-const currentWeatherEl = currentDayCardEl.children[0];
-const weatherForecastEl = document.querySelector(".weather-forecast");
-
 // gets current time, sets data on page
 function currentWeatherText(weatherData) {
+  console.log(`Current Weather:`);
   console.log(weatherData);
 
   //Displays City name & current day & hour
@@ -101,7 +114,7 @@ function weatherForecast(lat, lon) {
     .then((response) => response.json())
     .then((data) => {
       console.log(`5 Day Weather Forecast`);
-      // console.log(data);
+      console.log(data);
       let fiveDayForecast = [
         {
           time: dayjs(data.list[2].dt_txt).format("DD MMM, YYYY"),
@@ -146,7 +159,7 @@ function weatherForecast(lat, lon) {
       ];
       for (i = 0; i < fiveDayForecast.length; i++) {
         forecastWeatherCard(fiveDayForecast);
-      }
+      };
     });
 }
 
@@ -180,4 +193,31 @@ function forecastWeatherCard(weatherData) {
   );
 }
 
+function loadLocalStorage() {
+  for (i = 0; i < localStorage.length; i++) {
+    let storedCity = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    let locationBtnEl = document.createElement("button");
+    locationBtnEl.setAttribute(
+      "class",
+      "btn btn-primary text-start history-btn"
+    );
+    locationBtnEl.textContent = storedCity.city;
+    sidebarListGroupEl.appendChild(locationBtnEl);
+    locationBtnEl.addEventListener('click', ()=> {
+      currentWeather(storedCity.lat, storedCity.lon);
+      weatherForecast(storedCity.lat, storedCity.lon);
+    });
+  };
+};
+
+function savedWeather() {
+  let storedCity = JSON.parse(localStorage.getItem('San Diego'));
+  console.log('Default City Location:')
+  console.log(storedCity);
+  currentWeather(storedCity.lat, storedCity.lon);
+  weatherForecast(storedCity.lat, storedCity.lon);
+}
+
+savedWeather();
+loadLocalStorage();
 searchBtnEl.addEventListener("click", retrieveLocation);

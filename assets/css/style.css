@@ -47,6 +47,11 @@ weather {
   padding: 1%;
   background-color: dodgerblue;
   color: white;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
 }
 
 #five-day-forecast {
@@ -55,4 +60,9 @@ weather {
   margin: 0 10% 0 10%;
   padding: 1%;
   color: white;
+  border-radius: 0px 0px 15px 15px;
+  -webkit-border-radius: 0px 0px 15px 15px;
+  -moz-border-radius: 0px 0px 15px 15px;
+  -ms-border-radius: 0px 0px 15px 15px;
+  -o-border-radius: 0px 0px 15px 15px;
 }
