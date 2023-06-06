@@ -2,8 +2,6 @@
 
 ## Description
 
-Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
-
 - A simple and functional weather app that can get current weather data and a 5-day forecast from a city.
 - With this application, you can find the current weather in your city, or a city where you would be traveling to.
 - Weather Data and Geolocation is provided by OpenWeatherMap's API.
