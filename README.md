@@ -1,4 +1,4 @@
-# <Your-Project-Title>
+# Weather App (UCSD Challenge 6)
 
 ## Description
 
